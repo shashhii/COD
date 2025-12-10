@@ -111,21 +111,16 @@ async def upload_image(file: UploadFile = File(...)):
         # Process with SINet V2
         start_time = asyncio.get_event_loop().time()
         image = cv2.imread(upload_path)
-        print(f"Image loaded: {image.shape if image is not None else 'None'}")
-        print(f"Upload path: {upload_path}")
         
         if image is None:
             raise HTTPException(status_code=400, detail="Could not load image")
             
-        detections = await model.predict(image, confidence_threshold=0.01)
-        print(f"Detections found: {len(detections)}")
-        print(f"Detection details: {detections}")
+        detections = await model.predict(image, confidence_threshold=0.1)
         
         # Filter out very small objects (less than 1% of image area)
         h, w = image.shape[:2]
         min_area = (h * w) * 0.01
         detections = [d for d in detections if (d['bbox'][2] - d['bbox'][0]) * (d['bbox'][3] - d['bbox'][1]) >= min_area]
-        print(f"Detections after filtering small objects: {len(detections)}")
         
         processing_time = asyncio.get_event_loop().time() - start_time
         
@@ -140,22 +135,18 @@ async def upload_image(file: UploadFile = File(...)):
             ))
         
         # Create visualizations
-        print("Creating visualizations...")
         detection_img = create_detection_visualization(image, detections)
-        print(f"Detection image created: {len(detection_img) if detection_img else 0} chars")
         segmentation_img = create_segmentation_visualization(image, detections)
-        print(f"Segmentation image created: {len(segmentation_img) if segmentation_img else 0} chars")
         heatmap_img = create_heatmap_visualization(image, detections)
-        print(f"Heatmap image created: {len(heatmap_img) if heatmap_img else 0} chars")
         
-        # If no visualizations created, use original image
-        if not detection_img and image is not None:
+        # Ensure all images are created (fallback to original)
+        if not detection_img:
             _, buffer = cv2.imencode('.jpg', image)
             detection_img = base64.b64encode(buffer).decode()
-        if not segmentation_img and image is not None:
+        if not segmentation_img:
             _, buffer = cv2.imencode('.jpg', image)
             segmentation_img = base64.b64encode(buffer).decode()
-        if not heatmap_img and image is not None:
+        if not heatmap_img:
             _, buffer = cv2.imencode('.jpg', image)
             heatmap_img = base64.b64encode(buffer).decode()
         
@@ -171,8 +162,11 @@ async def upload_image(file: UploadFile = File(...)):
             }
         )
         
-        print(f"Response created with {len(results)} results")
-        print(f"Images in response: detection={len(detection_img) if detection_img else 0}, segmentation={len(segmentation_img) if segmentation_img else 0}, heatmap={len(heatmap_img) if heatmap_img else 0}")
+        # Clean up uploaded file
+        try:
+            os.remove(upload_path)
+        except:
+            pass
         
         return response
         

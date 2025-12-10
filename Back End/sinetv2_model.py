@@ -89,7 +89,6 @@ class SINetV2Model:
         
         try:
             mask = pred_mask.squeeze().cpu().numpy()
-            print(f"Prediction mask stats: min={mask.min():.4f}, max={mask.max():.4f}, mean={mask.mean():.4f}")
             h_orig, w_orig = original_shape[:2]
             mask_resized = cv2.resize(mask, (w_orig, h_orig))
             
