@@ -33,13 +33,22 @@ class SINetV2Model:
             
             pretrained_path = base_dir / "res2net50_v1b_26w_4s-3cf99910.pth"
             
-            # Check if model files exist
+                # Check if model files exist and are valid
             if not Path(model_path).exists():
                 logger.warning(f"Model file not found: {model_path}")
                 # Create a dummy model for deployment without trained weights
                 self.model = Network(channel=32, imagenet_pretrained=False, pretrained_path=None).to(self.device)
                 logger.info("Created model without pre-trained weights")
                 return
+            
+            # Check if file is valid (not HTML)
+            with open(model_path, 'rb') as f:
+                header = f.read(10)
+                if header.startswith(b'<!DOCTYPE') or header.startswith(b'<html'):
+                    logger.warning(f"Model file appears to be HTML, not a valid model: {model_path}")
+                    self.model = Network(channel=32, imagenet_pretrained=False, pretrained_path=None).to(self.device)
+                    logger.info("Created model without pre-trained weights due to invalid file")
+                    return
             
             self.model = Network(channel=32, imagenet_pretrained=True, pretrained_path=str(pretrained_path)).to(self.device)
             
