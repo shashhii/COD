@@ -26,11 +26,22 @@ class SINetV2Model:
         
     async def load_model(self, model_path: str = None) -> None:
         try:
-            if model_path is None:
-                model_path = r"C:\Users\shash\Downloads\COD\COD10K Trained model\Net_epoch_best.pth"
+            base_dir = Path(__file__).parent.parent / "COD10K Trained model"
             
-            pretrained_path = r"C:\Users\shash\Downloads\COD\COD10K Trained model\res2net50_v1b_26w_4s-3cf99910.pth"
-            self.model = Network(channel=32, imagenet_pretrained=True, pretrained_path=pretrained_path).to(self.device)
+            if model_path is None:
+                model_path = base_dir / "Net_epoch_best.pth"
+            
+            pretrained_path = base_dir / "res2net50_v1b_26w_4s-3cf99910.pth"
+            
+            # Check if model files exist
+            if not Path(model_path).exists():
+                logger.warning(f"Model file not found: {model_path}")
+                # Create a dummy model for deployment without trained weights
+                self.model = Network(channel=32, imagenet_pretrained=False, pretrained_path=None).to(self.device)
+                logger.info("Created model without pre-trained weights")
+                return
+            
+            self.model = Network(channel=32, imagenet_pretrained=True, pretrained_path=str(pretrained_path)).to(self.device)
             
             checkpoint = torch.load(model_path, map_location=self.device)
             self.model.load_state_dict(checkpoint)
