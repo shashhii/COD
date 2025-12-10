@@ -140,7 +140,7 @@ def res2net50_v1b_26w_4s(pretrained=False, pretrained_path=None):
     model = Res2Net(Bottle2neck, [3, 4, 6, 3], baseWidth=26, scale=4)
     if pretrained and pretrained_path:
         try:
-            model.load_state_dict(torch.load(pretrained_path))
+            model.load_state_dict(torch.load(pretrained_path, map_location='cpu'))
         except FileNotFoundError:
             print(f"Warning: Pretrained weights not found at {pretrained_path}. Using random initialization.")
     return model
