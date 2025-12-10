@@ -7,11 +7,10 @@ def download_models():
     model_dir = Path("COD10K Trained model")
     model_dir.mkdir(exist_ok=True)
     
-    # URLs for your model files (you'll need to upload these to a cloud service)
+    # URLs for your model files
     models = {
         "res2net50_v1b_26w_4s-3cf99910.pth": "https://shanghuagao.oss-cn-beijing.aliyuncs.com/res2net/res2net50_v1b_26w_4s-3cf99910.pth",
-        # Add your trained model URL here when you upload it
-        # "Net_epoch_best.pth": "YOUR_MODEL_URL_HERE"
+        "Net_epoch_best.pth": "https://drive.google.com/uc?id=1khD_1VmoRk-xHeZAZSIp3RuYOvfzd845"
     }
     
     for filename, url in models.items():
