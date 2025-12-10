@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camouflage Object Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fabrica&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Fallback background */
+        body {
+            background: #000000 !important;
+            min-height: 100vh !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Camouflage Object Detection</h1>
+        
+        <div class="main-content">
+            <!-- Left Panel - Upload Section -->
+            <div class="left-panel">
+                <div class="upload-section">
+                    <h2><span class="icon icon-upload"></span> Upload Image</h2>
+                    
+                    <!-- Drag and Drop Area -->
+                    <div class="drop-zone" id="dropZone">
+                        <div class="drop-content">
+                            <div class="upload-icon"><span class="icon icon-image"></span></div>
+                            <p>Drag & Drop your image here</p>
+                            <p>or</p>
+                            <button class="browse-btn" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+                            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <!-- Preview Area -->
+                        <div class="preview-area" id="previewArea" style="display: none;">
+                            <img id="previewImage" src="" alt="Preview">
+                            <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                                <div class="loading-spinner"></div>
+                                <div class="loading-dots">
+                                    <div class="loading-dot"></div>
+                                    <div class="loading-dot"></div>
+                                    <div class="loading-dot"></div>
+                                </div>
+                                <div class="loading-text">Analyzing image...</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <!-- Submit Button -->
+                    <button class="submit-btn" id="submitBtn" disabled><span class="icon icon-play"></span> Analyze Image</button>
+                    
+                    <!-- Clear Button -->
+                    <button class="clear-btn" id="clearBtn"><span class="icon icon-trash"></span> Clear Image</button>
+                </div>
+            </div>
+            
+            <!-- Right Panel - Results Section -->
+            <div class="right-panel">
+                <div class="results-section">
+                    <div class="results-header">
+                        <h2><span class="icon icon-chart"></span> Analysis Results</h2>
+                    </div>
+                    
+                    <!-- Object Detection Results -->
+                    <div class="result-card">
+                        <h3><span class="icon icon-target"></span> Object Detection</h3>
+                        <div class="detection-results" id="detectionResults">
+                            <p class="no-results">Upload an image to see detection results</p>
+                        </div>
+                        <div class="result-image" id="detectionImage"></div>
+                    </div>
+                    
+                    <!-- Segmentation Results -->
+                    <div class="result-card">
+                        <h3><span class="icon icon-layers"></span> Image Segmentation</h3>
+                        <div class="segmentation-results" id="segmentationResults">
+                            <p class="no-results">Upload an image to see segmentation results</p>
+                        </div>
+                        <div class="result-image" id="segmentationImage"></div>
+                    </div>
+                    
+                    <!-- Heatmap Results -->
+                    <div class="result-card">
+                        <h3><span class="icon icon-heat"></span> Heatmap of Chances</h3>
+                        <div class="heatmap-results" id="heatmapResults">
+                            <p class="no-results">Upload an image to see probability heatmap</p>
+                        </div>
+                        <div class="result-image" id="heatmapImage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <!-- Image Preview Modal -->
+    <div class="modal" id="imagePreviewModal" style="display: none;">
+        <div class="preview-modal-content">
+            <span class="close" id="closePreviewModal">&times;</span>
+            <div class="preview-header">
+                <h3 id="previewTitle">Image Preview</h3>
+                <div class="preview-controls">
+                    <button class="speaker-btn" id="speakerBtn" title="Toggle audio announcements">
+                        <span class="icon icon-speaker" id="speakerIcon"></span>
+                    </button>
+                    <button id="downloadBtn" class="download-btn"><span class="icon icon-download"></span> Download</button>
+                </div>
+            </div>
+            <div class="preview-image-container">
+                <img id="previewModalImage" src="" alt="Preview">
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
