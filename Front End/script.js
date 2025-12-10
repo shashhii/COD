@@ -167,7 +167,7 @@ class CamouflageDetector {
             const formData = new FormData();
             formData.append('file', this.currentFile);
 
-            const response = await fetch('http://localhost:8000/upload', {
+            const response = await fetch('/upload', {
                 method: 'POST',
                 body: formData
             });
