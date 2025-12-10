@@ -54,6 +54,13 @@ class ProcessingResponse(BaseModel):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
+    # Download models if needed
+    try:
+        from download_models import download_models
+        download_models()
+    except Exception as e:
+        print(f"Model download failed: {e}")
+    
     await model.load_model()
     print(f"SINet V2 loaded on {device}")
     yield
