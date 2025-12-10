@@ -43,7 +43,7 @@ class SINetV2Model:
             
             self.model = Network(channel=32, imagenet_pretrained=True, pretrained_path=str(pretrained_path)).to(self.device)
             
-            checkpoint = torch.load(model_path, map_location=self.device)
+            checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
             self.model.load_state_dict(checkpoint)
             self.model.eval()
             
