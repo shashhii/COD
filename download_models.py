@@ -10,7 +10,7 @@ def download_models():
     # URLs for your model files
     models = {
         "res2net50_v1b_26w_4s-3cf99910.pth": "https://shanghuagao.oss-cn-beijing.aliyuncs.com/res2net/res2net50_v1b_26w_4s-3cf99910.pth",
-        "Net_epoch_best.pth": "https://drive.google.com/uc?export=download&id=1khD_1VmoRk-xHeZAZSIp3RuYOvfzd845"
+        "Net_epoch_best.pth": "https://www.dropbox.com/scl/fi/8awi5ddd72r3xz91cwwzb/Net_epoch_best.pth?rlkey=5vntbdgg5z7g8eoixfyfqm9rt&st=laauj032&dl=1"
     }
     
     for filename, url in models.items():
