@@ -122,7 +122,7 @@ async def upload_image(file: UploadFile = File(...)):
         if image is None:
             raise HTTPException(status_code=400, detail="Could not load image")
             
-        detections = await model.predict(image, confidence_threshold=0.1)
+        detections = await model.predict(image, confidence_threshold=0.01)
         
         # Filter out very small objects (less than 1% of image area)
         h, w = image.shape[:2]
