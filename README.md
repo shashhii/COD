@@ -1,256 +1,213 @@
-🥷 Camouflage Object Detection (COD) System
-AI System for Detecting Hard-to-See, Camouflaged Objects
+# 🥷 Camouflage Object Detection (COD) System
+*AI system for detecting objects that blend into their surroundings*
 
-🌐 Live Demo: https://cod-769q.onrender.com/
+### 🌐 Live Demo  
+👉 https://cod-769q.onrender.com/
 
-Upload any image and watch the AI uncover hidden, camouflaged objects in real time!
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-Framework-009688?logo=fastapi)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-ee4c2c?logo=pytorch)
+![Render](https://img.shields.io/badge/Hosted%20On-Render-46e3b7?logo=render)
+![License](https://img.shields.io/badge/License-Educational-lightgrey)
+![Status](https://img.shields.io/badge/Live-Demo%20Running-brightgreen)
 
-🎯 Overview
+---
 
-Camouflaged Object Detection (COD) is one of the most challenging tasks in computer vision. This project implements a state-of-the-art deep learning pipeline powered by SINet V2 with a Res2Net-50 backbone to accurately detect, segment, and visualize objects that blend seamlessly into their surroundings.
+## 🎯 Overview
+Camouflaged Object Detection (COD) is a challenging computer vision task.  
+This project implements **SINet V2** with a **Res2Net-50 backbone** to detect and segment hidden, camouflaged objects.
 
-The system is deployed using FastAPI and hosted on Render, offering a responsive web interface where users can upload images and instantly get results.
+It features:
+- Deep-learning powered inference  
+- Web interface with drag-and-drop support  
+- Real-time visualization  
+- Cloud deployment using Render  
 
-🧠 How It Works
-🔍 Architecture
+---
 
-Model: SINet V2 (Search & Identification Network V2)
+## 🧠 How It Works
 
-Backbone: Res2Net-50 (multi-scale feature extraction)
+### 🔍 Architecture
+- **Model:** SINet V2  
+- **Backbone:** Res2Net-50  
+- **Framework:** PyTorch  
+- **Server:** FastAPI  
+- **Frontend:** HTML + CSS + JavaScript  
 
-Framework: PyTorch
+### ⚙️ Detection Pipeline
+1. User uploads an image  
+2. Image is resized → normalized  
+3. Multi-scale features extracted via Res2Net  
+4. SINet V2 predicts camouflage regions  
+5. Outputs generated:
+   - Bounding Box View  
+   - Segmentation Mask  
+   - Heatmap View  
 
-Web Server: FastAPI
+---
 
-Frontend: HTML, CSS, JavaScript (Drag & Drop interface)
+## ✨ Key Features
+- ⚡ Real-time inference (CPU/GPU)  
+- 🔍 Multi-scale detection  
+- 📸 Three visualization outputs  
+- 📱 Responsive UI  
+- 🚀 Render deployment  
+- 🎯 Trained on COD10K dataset  
 
-⚙️ Detection Pipeline
+---
 
-📤 Image Upload — User drags/drops or selects an image
+## 🏗️ Project Structure (Clean & Correct)
 
-🧽 Preprocessing — Image resized to 320×320, normalized
-
-🧠 Feature Extraction — Res2Net extracts multi-scale patterns
-
-🎯 Detection — SINet V2 finds camouflaged regions
-
-🛠️ Post-processing — Produces masks, bounding boxes, heatmaps
-
-👁️ Visualization — Generates three outputs:
-
-Bounding Box View
-
-Segmentation Mask View
-
-Heatmap Probability View
-
-✨ Key Features
-
-⚡ Real-time detection on Render (CPU/GPU compatible)
-
-🔭 Multi-scale analysis for detecting large & small camouflaged objects
-
-🎯 High Accuracy trained on the COD10K dataset
-
-🖼️ Interactive Web UI with drag-and-drop upload
-
-🎨 Multiple visualization modes
-
-📱 Responsive design (works on mobile & desktop)
-
-🏗️ Project Structure
 COD/
-├── app.py                          # FastAPI backend server
-├── requirements.txt                # Python dependencies
-├── runtime.txt                     # Python version
-├── render.yaml                     # Render deployment config
-├── download_models.py              # Downloads model weights
+├── app.py # FastAPI backend server
+├── requirements.txt # Python package dependencies
+├── runtime.txt # Specifies Python version
+├── render.yaml # Render deployment configuration
+├── download_models.py # Downloads model weights automatically
 │
-├── Front End/
-│   ├── index.html                  # UI page
-│   ├── style.css                   # Styles
-│   └── script.js                   # JS functionality
+├── front-end/
+│ ├── index.html # Web interface UI
+│ ├── style.css # Frontend styling
+│ └── script.js # Frontend logic (upload + output)
 │
-├── Back End/
-│   ├── sinetv2_model.py            # Model wrapper
-│   ├── Network_Res2Net_GRA_NCD.py  # Architecture implementation
-│   └── Res2Net_v1b.py              # Res2Net backbone
+├── back-end/
+│ ├── sinetv2_model.py # Model wrapper for inference
+│ ├── Network_Res2Net_GRA_NCD.py # SINet V2 architecture (GRA + NCD)
+│ └── Res2Net_v1b.py # Res2Net backbone
 │
-├── COD10K Trained model/
-│   ├── Net_epoch_best.pth          # Trained COD model
-│   └── res2net50_v1b_26w.pth       # Backbone weights
+├── models/ # Not stored in Git (auto-downloaded)
+│ ├── Net_epoch_best.pth # Main trained model weights
+│ └── res2net50_v1b_26w_4s.pth # Backbone weights
 │
-└── uploads/                        # Temporary uploaded images
+└── uploads/ # Temporary runtime uploads
 
-🛠️ Technology Stack
-Backend
+yaml
+Copy code
 
-⚡ FastAPI
+✔️ *This structure will render correctly on GitHub.*
 
-🔥 PyTorch
+---
 
-🖼️ OpenCV
+## 🛠️ Technology Stack
 
-🧮 NumPy
+### Backend
+- FastAPI  
+- PyTorch  
+- OpenCV  
+- NumPy  
+- Pillow  
 
-🖌️ Pillow
+### Frontend
+- HTML5  
+- CSS3  
+- JavaScript  
+- Drag & Drop API  
 
-Frontend
+### Deployment
+- Render  
+- Git  
+- Dropbox (for serving model weights)  
 
-HTML5
+---
 
-CSS3
+## 🚀 Deployment Details (Render)
 
-JavaScript
-
-Drag & Drop API
-
-Deployment
-
-☁️ Render (cloud hosting)
-
-Git (version control)
-
-Dropbox (model hosting)
-
-🚀 Deployment Workflow
-1️⃣ Model Preparation
-
-Trained on COD10K
-
-Model weights stored on Dropbox
-
-Auto-download during first server startup
-
-2️⃣ Code Optimization
-
-GPU → CPU conversion for Render
-
-Added stable error handling
-
-Added fallback loading mechanisms
-
-3️⃣ Render Deployment
-
-Build Command:
+### Build Command
+```bash
 pip install -r requirements.txt
-
-Start Command:
+Start Command
+bash
+Copy code
 uvicorn app:app --host 0.0.0.0 --port $PORT
+Auto Model Download
+Runs download_models.py on startup
 
-Python version: 3.11.9
+Downloads SINet V2 + Res2Net weights
 
-4️⃣ Automatic Weight Download
-
-SINet V2 backbone downloaded from official source
-
-Trained weights downloaded from Dropbox
-
-Validation checks ensure correct weights
+Verifies file integrity
 
 🎮 Usage Instructions
 🌐 Web Interface
+Go to: https://cod-769q.onrender.com
 
-Visit → https://cod-769q.onrender.com
-
-Upload an image (drag/drop or browse)
+Upload image (Drag-drop / Browse)
 
 Click Analyze Image
 
-View results:
+View:
 
-Detection
+Bounding Boxes
 
-Segmentation
+Segmentation Mask
 
-Heatmap
+Heatmap Output
 
-Download images if needed
+Download results if needed
 
-🧪 API Endpoints
+🔌 API Endpoints
 Endpoint	Method	Description
 /	GET	Main UI
-/upload	POST	Image detection
-/health	GET	System health check
-/style.css	GET	Stylesheet
-/script.js	GET	Frontend JavaScript
-🔧 Local Development
-Prerequisites
+/upload	POST	Process image & return results
+/health	GET	Status check
 
+🔧 Local Development Setup
+Prerequisites
 Python 3.11+
 
-(Optional) CUDA-based GPU
+(Optional) CUDA GPU
 
-8GB RAM recommended
+Min. 8 GB RAM
 
-Setup
-git clone <repository_url>
+Start Development
+bash
+Copy code
+git clone <repo-url>
+cd COD
 pip install -r requirements.txt
 python app.py
-
-
 Open browser:
 👉 http://localhost:8000
 
 📊 Model Performance
-
 Dataset: COD10K
 
-Architecture: SINet V2 + Res2Net-50
+Input size: 320×320
 
-Input Size: 320 × 320
+Avg CPU inference: 2–3 seconds/image
 
-Avg Inference Time: 2–3 seconds (CPU)
+Confidence threshold: 0.01
 
-Confidence Threshold: 0.01
+🔄 Challenges & Solutions
+❗ Model File Size Limit
+✔️ Solved by hosting on Dropbox + auto download
 
-🌟 Key Innovations
+❗ GPU → CPU Compatibility
+✔️ Added map_location='cpu'
 
-🎯 Group-Reversal Attention (GRA)
+❗ PyTorch 2.6 Loading Issues
+✔️ Set weights_only=False for compatibility
 
-🔄 Neighbor Connection Decoder (NCD)
+❗ Google Drive Blocking Downloads
+✔️ Moved to stable Dropbox links
 
-📡 Multi-Scale Feature Extraction
+🌟 Future Enhancements
+GPU inference
 
-⚡ Fast real-time web inference
+Batch processing
 
-🔄 Deployment Challenges & Solutions
-❗ Large model files
+Video input support
 
-✔️ Used cloud download instead of storing in Git
+Mobile app (Android / iOS)
 
-❗ GPU → CPU migration
+Enhanced visualizations
 
-✔️ Added map_location='cpu' and correct PyTorch flags
-
-❗ PyTorch 2.6 loading issues
-
-✔️ Used weights_only=False for compatibility
-
-❗ Google Drive blocked downloads
-
-✔️ Switched to stable Dropbox direct links
-
-🎯 Future Enhancements
-
-🚀 GPU inference support
-
-🎥 Video camouflaged object detection
-
-📦 Batch image processing
-
-📱 Android/iOS app
-
-🎨 Advanced visualization modes
-
-🧰 Custom training UI
-
-📝 License
-
-This project is intended for educational and research purposes.
-Model weights and architecture follow their respective research publications.
+Custom training UI
 
 🤝 Contributing
+Contributions are welcome!
+Feel free to open issues or submit feature requests.
 
-Contributions are always welcome!
-Feel free to open an issue or submit a pull request ⭐
+📝 License
+This project is for educational & research purposes only.
+Model architecture credits: SINet V2 & Res2Net papers.
+
